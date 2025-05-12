@@ -22,7 +22,7 @@
 					<option id="machineOption" value="machine" >Machine</option>
 					<option id="robotOption" value="robot" >Robot</option>
 					<option id="environmentOption" value="environment" >Environment</option>
-					<option id="processOption" value="process" selected>Process</option>
+					<option id="processOption" value="process" >Process</option>
 					<option id="ouOption" value="organizationunit" >Organization Unit</option>
 					<option id="folderOption" value="folder" >Folder</option>
 					<option id="queueOption" value="queue" >Queue</option>
@@ -71,7 +71,7 @@
 		function selectOperationSelectedBefore() {
 			'use strict';
 			/** @type {string} */
-			var selectedOptionValue = 'get';
+			var selectedOptionValue = '_FormSelectedOperation_';
 			if (selectedOptionValue[0] !== '_') {
 				/** @type {HTMLCollection} */
 				var operationOptions = document.getElementById('operation').children;

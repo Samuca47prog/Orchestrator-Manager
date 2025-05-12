@@ -36,6 +36,7 @@
       <x:String>UiPath.Platform.ResourceHandling</x:String>
       <x:String>System.Reflection</x:String>
       <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Linq.Expressions</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -79,12 +80,17 @@
       <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="EntityPanelBuilder" sap:VirtualizedContainerService.HintSize="496,1240" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="EntityPanelBuilder" sap:VirtualizedContainerService.HintSize="1510.6666666666667,1118.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="EntityPanelHTML" />
-      <Variable x:TypeArguments="scg:List(x:String)" Default="[New List(of String) from {&quot;Folders&quot;,&quot;Assets&quot;,&quot;Queues&quot;,&quot;Packages&quot;,&quot;Processes&quot;,&quot;Triggers&quot;}]" Name="EntityNames" />
+      <Variable x:TypeArguments="scg:List(x:String)" Name="EntityNames">
+        <Variable.Default>
+          <VisualBasicValue x:TypeArguments="scg:List(x:String)" ExpressionText="New List(of String) from {&quot;Folders&quot;,&quot;Assets&quot;,&quot;Queues&quot;,&quot;Packages&quot;,&quot;Processes&quot;,&quot;Triggers&quot;, &quot;StorageBuckets&quot;}" />
+        </Variable.Default>
+      </Variable>
       <Variable x:TypeArguments="x:String" Default="&lt;option selected&gt;Name&lt;/option&gt;" Name="SelectOptionsTemplate" />
       <Variable x:TypeArguments="scg:ICollection(x:String)" Default="[New Collection(of String)]" Name="SelectEntityOptions" />
     </Sequence.Variables>
@@ -93,8 +99,8 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ReadTextFile File="{x:Null}" Content="[EntityPanelHTML]" DisplayName="Read File Entity Panel Template" FileName="[in_Config(&quot;EntityPanelTemplatePath&quot;)]" sap:VirtualizedContainerService.HintSize="433.6,80.8" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
-    <Assign DisplayName="Assign Form Title" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <ui:ReadTextFile File="{x:Null}" Content="[EntityPanelHTML]" DisplayName="Read File Entity Panel Template" FileName="[in_Config(&quot;EntityPanelTemplatePath&quot;)]" sap:VirtualizedContainerService.HintSize="450,114" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+    <Assign DisplayName="Assign Form Title" sap:VirtualizedContainerService.HintSize="450,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[EntityPanelHTML]</OutArgument>
       </Assign.To>
@@ -102,7 +108,7 @@
         <InArgument x:TypeArguments="x:String">[EntityPanelHtml.Replace("_FormTitle_", in_Config("EntityFormHeader"))]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="Assign Form OU Label (Entities)" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_4">
+    <Assign DisplayName="Assign Form OU Label (Entities)" sap:VirtualizedContainerService.HintSize="450,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_4">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[EntityPanelHTML]</OutArgument>
       </Assign.To>
@@ -110,7 +116,7 @@
         <InArgument x:TypeArguments="x:String">[EntityPanelHtml.Replace("_FormOULabel_", in_Config("EntityLabel"))]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="Assign Submit Button" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign DisplayName="Assign Submit Button" sap:VirtualizedContainerService.HintSize="450,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[EntityPanelHTML]</OutArgument>
       </Assign.To>
@@ -118,19 +124,19 @@
         <InArgument x:TypeArguments="x:String">[EntityPanelHtml.Replace("_FormSubmitButton_", in_Config("EntitySubmitButton"))]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="433.6,346.4" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[EntityNames]">
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="450,353.3333333333333" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[EntityNames]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:String">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:String" Name="item" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="300,158.4" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,153.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <AddToCollection x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Select option for an OU/Folder." Collection="[SelectEntityOptions]" DisplayName="Add To Collection" sap:VirtualizedContainerService.HintSize="256.8,68.8" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[SelectOptionsTemplate.Replace(&quot;Name&quot;, item.ToString)]">
+            <AddToCollection x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Select option for an OU/Folder." Collection="[SelectEntityOptions]" DisplayName="Add To Collection" sap:VirtualizedContainerService.HintSize="382,93.33333333333333" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[SelectOptionsTemplate.Replace(&quot;Name&quot;, item.ToString)]">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
@@ -141,7 +147,7 @@
         </ActivityAction>
       </ui:ForEach.Body>
     </ui:ForEach>
-    <Assign DisplayName="Assign OUs/Folders Select Input Options" sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_5">
+    <Assign DisplayName="Assign OUs/Folders Select Input Options" sap:VirtualizedContainerService.HintSize="450,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_5">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[EntityPanelHTML]</OutArgument>
       </Assign.To>
@@ -149,6 +155,6 @@
         <InArgument x:TypeArguments="x:String">[EntityPanelHtml.Replace("_FormOUsSelectOptions_", String.Join(Environment.NewLine, SelectEntityOptions))]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:WriteTextFile File="{x:Null}" DisplayName="Write File Entity Panel" FileName="[in_Config(&quot;EntityPanelPath&quot;)]" sap:VirtualizedContainerService.HintSize="433.6,134.4" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" Text="[EntityPanelHTML]" />
+    <ui:WriteTextFile File="{x:Null}" DisplayName="Write File Entity Panel" FileName="[in_Config(&quot;EntityPanelPath&quot;)]" sap:VirtualizedContainerService.HintSize="450,159.33333333333334" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" Text="[EntityPanelHTML]" />
   </Sequence>
 </Activity>
